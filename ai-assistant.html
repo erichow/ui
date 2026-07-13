@@ -85,6 +85,43 @@
       --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
     }
 
+    /* ══════ Theme: Cerulean Dark (deep ocean / azure) ══════ */
+    .theme-cerulean-dark {
+      --bg-primary: #0c1222;
+      --bg-secondary: #131b30;
+      --bg-tertiary: #1a2540;
+      --bg-hover: #1e2d4a;
+      --bg-elevated: #182240;
+      --bg-user-msg: #0f2642;
+      --border-subtle: rgba(148, 163, 184, 0.08);
+      --border-default: rgba(148, 163, 184, 0.12);
+      --border-hover: rgba(148, 163, 184, 0.20);
+      --text-primary: #e2e8f0;
+      --text-secondary: #94a3b8;
+      --text-tertiary: #64748b;
+      --text-inverse: #0c1222;
+      --accent: #38bdf8;
+      --accent-hover: #7dd3fc;
+      --accent-muted: rgba(56, 189, 248, 0.12);
+      --accent-subtle: rgba(56, 189, 248, 0.06);
+      --accent-gradient: linear-gradient(135deg, #0ea5e9, #38bdf8);
+      --user-gradient: linear-gradient(135deg, #475569, #334155);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.45);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
     /* Smooth transition when switching themes */
     html,
     html *,
@@ -409,6 +446,7 @@
 
     .theme-switcher-btn .theme-dot.cornflower { background: #5383e8; }
     .theme-switcher-btn .theme-dot.editorial { background: #8b3a3a; }
+    .theme-switcher-btn .theme-dot.cerulean-dark { background: #38bdf8; }
 
     .theme-switcher-btn i { font-size: 10px; margin-left: 2px; }
     .theme-switcher-btn .icon { width: 10px; height: 10px; margin-left: 2px; }
@@ -463,6 +501,7 @@
 
     .theme-option .swatch.cornflower { background: linear-gradient(135deg, #f4f6f9, #5383e8); }
     .theme-option .swatch.editorial { background: linear-gradient(135deg, #f8f4ed, #8b3a3a); }
+    .theme-option .swatch.cerulean-dark { background: linear-gradient(135deg, #0c1222, #38bdf8); }
 
     .theme-option .theme-label {
       flex: 1;
@@ -500,6 +539,9 @@
     }
     .theme-cornflower .message:hover {
       background: rgba(0, 0, 0, 0.015);
+    }
+    .theme-cerulean-dark .message:hover {
+      background: rgba(255, 255, 255, 0.03);
     }
     .message-content {
       flex: 1;
@@ -1076,6 +1118,11 @@
             <span class="theme-label">Editorial</span>
             <span class="theme-check"><iconify-icon class="icon" icon="solar:check-circle-linear"></iconify-icon></span>
           </button>
+          <button class="theme-option" data-theme="cerulean-dark">
+            <span class="swatch cerulean-dark"></span>
+            <span class="theme-label">Cerulean Dark</span>
+            <span class="theme-check"><iconify-icon class="icon" icon="solar:check-circle-linear"></iconify-icon></span>
+          </button>
         </div>
       </div>
 
@@ -1162,10 +1209,12 @@
   const themeNames = {
     cornflower: 'Cornflower · 淡蓝轻风',
     editorial: 'Editorial · 暖意纸纹',
+    'cerulean-dark': 'Cerulean Dark · 蔚蓝深空',
   };
   const themeDots = {
     cornflower: 'cornflower',
     editorial: 'editorial',
+    'cerulean-dark': 'cerulean-dark',
   };
 
   function switchTheme(theme) {
