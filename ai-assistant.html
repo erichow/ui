@@ -6,7 +6,7 @@
   <title>Reasonix AI · 智能助手</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <!-- All 3 theme fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@450;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@450;500&display=swap" rel="stylesheet">
   <style>
     /* ══════ Inline SVG Icons (replaces Font Awesome) ══════ */
     .icon { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; flex-shrink: 0; color: currentColor; vertical-align: middle; }
@@ -85,41 +85,49 @@
       --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
     }
 
-    /* ══════ Theme: Cerulean Dark (deep ocean / azure) ══════ */
+    /* ══════ Theme: Cerulean Dark (near-black / steel-blue accent / monospace) ══════ */
     .theme-cerulean-dark {
-      --bg-primary: #0c1222;
-      --bg-secondary: #131b30;
-      --bg-tertiary: #1a2540;
-      --bg-hover: #1e2d4a;
-      --bg-elevated: #182240;
-      --bg-user-msg: #0f2642;
-      --border-subtle: rgba(148, 163, 184, 0.08);
-      --border-default: rgba(148, 163, 184, 0.12);
-      --border-hover: rgba(148, 163, 184, 0.20);
-      --text-primary: #e2e8f0;
-      --text-secondary: #94a3b8;
-      --text-tertiary: #64748b;
-      --text-inverse: #0c1222;
-      --accent: #38bdf8;
-      --accent-hover: #7dd3fc;
-      --accent-muted: rgba(56, 189, 248, 0.12);
-      --accent-subtle: rgba(56, 189, 248, 0.06);
-      --accent-gradient: linear-gradient(135deg, #0ea5e9, #38bdf8);
-      --user-gradient: linear-gradient(135deg, #475569, #334155);
+      --bg-primary: #0b0d0e;
+      --bg-secondary: #101214;
+      --bg-tertiary: #181a1d;
+      --bg-hover: #1e2024;
+      --bg-elevated: #151719;
+      --bg-user-msg: #191d24;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-default: rgba(255, 255, 255, 0.10);
+      --border-hover: rgba(255, 255, 255, 0.16);
+      --text-primary: #f0f2f5;
+      --text-secondary: #9ca3af;
+      --text-tertiary: #6b7280;
+      --text-inverse: #0b0d0e;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-muted: rgba(59, 130, 246, 0.12);
+      --accent-subtle: rgba(59, 130, 246, 0.06);
+      --accent-gradient: linear-gradient(135deg, #2563eb, #3b82f6);
+      --user-gradient: linear-gradient(135deg, #4b5563, #374151);
       --success: #22c55e;
-      --warning: #f59e0b;
+      --warning: #eab308;
       --error: #ef4444;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 14px;
-      --radius-xl: 18px;
-      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
-      --shadow-md: 0 4px 16px rgba(0,0,0,0.35);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
-      --shadow-xl: 0 16px 48px rgba(0,0,0,0.45);
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-display: 'Plus Jakarta Sans', var(--font-sans);
-      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.45);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
+      --shadow-xl: 0 16px 40px rgba(0,0,0,0.55);
+      --font-sans: 'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Geist', var(--font-sans);
+      --font-mono: 'Geist Mono', 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ── Cerulean Dark: overrides for dark-specific elements ── */
+    .theme-cerulean-dark ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .theme-cerulean-dark ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.25);
     }
 
     /* Smooth transition when switching themes */
@@ -446,7 +454,7 @@
 
     .theme-switcher-btn .theme-dot.cornflower { background: #5383e8; }
     .theme-switcher-btn .theme-dot.editorial { background: #8b3a3a; }
-    .theme-switcher-btn .theme-dot.cerulean-dark { background: #38bdf8; }
+    .theme-switcher-btn .theme-dot.cerulean-dark { background: #3b82f6; }
 
     .theme-switcher-btn i { font-size: 10px; margin-left: 2px; }
     .theme-switcher-btn .icon { width: 10px; height: 10px; margin-left: 2px; }
@@ -501,7 +509,7 @@
 
     .theme-option .swatch.cornflower { background: linear-gradient(135deg, #f4f6f9, #5383e8); }
     .theme-option .swatch.editorial { background: linear-gradient(135deg, #f8f4ed, #8b3a3a); }
-    .theme-option .swatch.cerulean-dark { background: linear-gradient(135deg, #0c1222, #38bdf8); }
+    .theme-option .swatch.cerulean-dark { background: linear-gradient(135deg, #0b0d0e, #3b82f6); }
 
     .theme-option .theme-label {
       flex: 1;
