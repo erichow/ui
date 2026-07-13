@@ -23,7 +23,7 @@
       --text-secondary: #52525b;
       --text-tertiary: #a1a1aa;
       --text-inverse: #ffffff;
-      --accent: #6366f1;
+      --accent: #6366f1;        /* indigo */
       --accent-hover: #5558e6;
       --accent-muted: rgba(99, 102, 241, 0.10);
       --accent-subtle: rgba(99, 102, 241, 0.05);
@@ -55,7 +55,7 @@
       flex-direction: column;
     }
 
-    /* ── Scrollbar ── */
+    /* ── Scrollbar (from ①) ── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 3px; }
@@ -68,7 +68,7 @@
       left: 0;
       width: 260px;
       height: 100vh;
-      background: #f8f8fa;
+      background: #f4f4f6;  /* Light 侧栏 */
       border-right: 1px solid var(--border-default);
       display: flex;
       flex-direction: column;
@@ -84,7 +84,7 @@
     .sidebar-logo {
       width: 28px;
       height: 28px;
-      background: var(--accent-gradient);
+      background: var(--accent-gradient);  /* ② 紫色渐变 */
       border-radius: 6px;
       display: flex;
       align-items: center;
@@ -102,14 +102,15 @@
     .sidebar-badge {
       font-size: 10px;
       font-weight: 500;
-      background: rgba(99, 102, 241, 0.10);
+      background: rgba(99, 102, 241, 0.15);  /* ② badge 风格 */
       color: #6366f1;
-      border: 1px solid rgba(99, 102, 241, 0.20);
+      border: 1px solid rgba(99, 102, 241, 0.25);
       padding: 1px 8px;
       border-radius: 10px;
       margin-left: auto;
     }
 
+    /* ── New Chat Button (from ②) ── */
     .new-chat-btn {
       margin: 12px 12px 8px;
       padding: 9px 0;
@@ -129,10 +130,14 @@
     }
     .new-chat-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
     }
     .new-chat-btn i { font-size: 11px; }
 
+    /* ── Sidebar Search (from ①) ── */
+
+
+    /* ── Conversation List ── */
     .sidebar-section {
       padding: 8px 16px 4px;
       font-size: 10px;
@@ -153,16 +158,16 @@
       cursor: pointer;
       transition: all 0.12s;
       text-decoration: none;
-      border-left: 2px solid transparent;
+      border-left: 2px solid transparent;  /* ② active indicator */
     }
     .sidebar-item:hover {
       background: var(--bg-hover);
       color: var(--text-primary);
     }
     .sidebar-item.active {
-      background: rgba(99, 102, 241, 0.06);
+      background: rgba(99, 102, 241, 0.08);  /* ② active bg */
       color: var(--accent);
-      border-left-color: var(--accent);
+      border-left-color: var(--accent);       /* ② left border */
     }
 
     .sidebar-item .dot {
@@ -186,6 +191,7 @@
     .sidebar-item-wrap {
       position: relative;
     }
+    /* ── Sidebar Dropdown ── */
     .sidebar-dropdown {
       display: none;
       position: absolute;
@@ -193,7 +199,7 @@
       top: 100%;
       z-index: 20;
       min-width: 140px;
-      background: var(--bg-primary);
+      background: var(--bg-elevated);
       border: 1px solid var(--border-default);
       border-radius: var(--radius-md);
       padding: 4px;
@@ -223,7 +229,7 @@
     }
     .dropdown-item.danger:hover {
       color: var(--error);
-      background: rgba(220, 38, 38, 0.06);
+      background: rgba(239, 68, 68, 0.1);
     }
     .dropdown-item i {
       width: 14px;
@@ -231,6 +237,7 @@
       text-align: center;
       flex-shrink: 0;
     }
+    /* dot/time stay visible */
     .sidebar-more-btn {
       width: 22px;
       height: 22px;
@@ -248,9 +255,13 @@
       margin-left: auto;
     }
     .sidebar-more-btn:hover {
-      color: var(--text-secondary);
+      color: var(--text-primary);
       background: var(--bg-hover);
     }
+    /* padding-right removed */
+
+    /* ── Sidebar Footer (from ② style) ── */
+
 
     /* ══════ Main Layout ══════ */
     .main {
@@ -261,6 +272,7 @@
       height: 100vh;
     }
 
+    /* ── Top Bar (融合 ① 结构 + ② 细节) ── */
     .topbar {
       height: 52px;
       display: flex;
@@ -284,7 +296,7 @@
     .topbar-msg-count {
       font-size: 10px;
       color: var(--text-tertiary);
-      background: var(--bg-secondary);
+      background: var(--bg-tertiary);
       padding: 2px 8px;
       border-radius: 4px;
       border: 1px solid var(--border-subtle);
@@ -324,6 +336,7 @@
       gap: 2px;
     }
 
+    /* ── Message ── */
     .message {
       display: flex;
       gap: 12px;
@@ -337,10 +350,12 @@
     .message:hover {
       background: rgba(0, 0, 0, 0.015);
     }
+    /* Avatar removed */
     .message-content {
       flex: 1;
       min-width: 0;
     }
+    /* message-header removed */
     .message-body {
       font-size: 14px;
       line-height: 1.65;
@@ -374,9 +389,11 @@
       font-size: 13px;
     }
 
+    /* ── User Message Bubble (from ②) ── */
     .message.user-bubble {
       justify-content: flex-end;
     }
+    /* User bubble avatar removed */
     .message.user-bubble .message-content {
       order: 0;
     }
@@ -389,10 +406,12 @@
       margin-left: auto;
     }
     .message.user-bubble .message-body p { margin: 0; }
+    /* user-bubble message-header removed */
     .message.user-bubble .message-actions {
       justify-content: flex-end;
     }
 
+    /* ── Message Hover Actions (from ①) ── */
     .message-actions {
       display: flex;
       align-items: center;
@@ -422,6 +441,7 @@
     }
     .message-action-btn i { font-size: 12px; }
 
+    /* ── Code Block macOS Style (from ②) ── */
     .code-block {
       margin: 10px 0;
       background: var(--bg-elevated);
@@ -481,6 +501,7 @@
       font-family: var(--font-mono);
     }
 
+    /* ── Code Actions: hover reveal ── */
     .code-actions {
       display: flex;
       align-items: center;
@@ -509,6 +530,7 @@
     }
     .code-action-btn i { font-size: 12px; }
 
+    /* ── User Message Hover Actions ── */
     .user-actions {
       display: flex;
       align-items: center;
@@ -520,6 +542,7 @@
     }
     .message.user-bubble:hover .user-actions { opacity: 1; }
 
+    /* ── Streaming Cursor (from ①) ── */
     .streaming-cursor {
       display: inline-block;
       width: 2px;
@@ -534,6 +557,7 @@
       50% { opacity: 0; }
     }
 
+    /* ── Conversation View ── */
     .conversation-view {
       animation: fadeIn 0.25s ease;
     }
@@ -542,6 +566,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── Thinking Block (from ①) ── */
     .thinking-block {
       display: flex;
       align-items: center;
@@ -571,6 +596,7 @@
       40% { transform: scale(1); opacity: 1; }
     }
 
+    /* ── Suggestion Chips (from ①) ── */
     .suggestions {
       display: flex;
       flex-wrap: wrap;
@@ -585,7 +611,7 @@
       font-size: 12px;
       font-weight: 500;
       color: var(--text-secondary);
-      background: var(--bg-secondary);
+      background: var(--bg-tertiary);
       border: 1px solid var(--border-subtle);
       border-radius: 100px;
       cursor: pointer;
@@ -598,6 +624,7 @@
       color: var(--text-primary);
     }
 
+    /* ── Divider (from ①) ── */
     .divider {
       display: flex;
       align-items: center;
@@ -619,11 +646,12 @@
       white-space: nowrap;
     }
 
+    /* ── Reasoning Block ── */
     .reasoning-block {
       margin: 6px 0 8px;
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      background: var(--bg-elevated);
+      background: var(--bg-tertiary);
       overflow: hidden;
     }
     .reasoning-summary {
@@ -643,6 +671,7 @@
       background: var(--bg-hover);
     }
     .reasoning-summary::-webkit-details-marker { display: none; }
+    /* reasoning-time merged into summary text */
     .reasoning-arrow {
       font-size: 10px;
       color: var(--text-tertiary);
@@ -662,7 +691,7 @@
     .reasoning-body p { margin-bottom: 6px; }
     .reasoning-body p:last-child { margin-bottom: 0; }
 
-    /* ══════ Input Area ══════ */
+    /* ══════ Input Area (融合 ① 结构 + ② 图标) ══════ */
     .input-area {
       flex-shrink: 0;
       padding: 12px 20px 16px;
@@ -750,7 +779,7 @@
       width: 34px;
       height: 34px;
       border: none;
-      background: var(--accent-gradient);
+      background: var(--accent-gradient);  /* ② 渐变 */
       color: white;
       border-radius: var(--radius-md);
       cursor: pointer;
@@ -761,7 +790,7 @@
     }
     .input-send:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
     }
     .input-send:disabled {
       background: var(--bg-tertiary);
@@ -772,7 +801,8 @@
     }
     .input-send i { font-size: 14px; }
 
-    /* ══════ Responsive ══════ */
+
+    /* ══════ Responsive (from ①) ══════ */
     @media (max-width: 768px) {
       .sidebar { display: none; }
       .main { margin-left: 0; }
@@ -793,8 +823,12 @@
     <span class="sidebar-badge">Pro</span>
   </div>
 
-  <button class="new-chat-btn"><i class="fa-regular fa-plus"></i> 新建对话</button>
 
+
+  <!-- Search (from ①) -->
+
+
+  <!-- Conversations -->
   <div class="sidebar-section">历史对话</div>
   <div class="sidebar-item-wrap">
   <a class="sidebar-item active" href="#" data-conversation="产品方案讨论">
@@ -829,6 +863,7 @@
     <button class="dropdown-item danger"><i class="fa-solid fa-trash-can"></i> 删除</button>
   </div>
   </div>
+
   <div class="sidebar-item-wrap">
   <a class="sidebar-item" href="#" data-conversation="API 集成方案">
     <span class="dot" style="visibility:hidden"></span>
@@ -851,211 +886,325 @@
     <button class="dropdown-item danger"><i class="fa-solid fa-trash-can"></i> 删除</button>
   </div>
   </div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="Python 数据分析">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">Python 数据分析</span>
+    <button class="sidebar-more-btn"><i class="fa-solid fa-ellipsis"></i></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><i class="fa-regular fa-pen-to-square"></i> 重命名</button>
+    <button class="dropdown-item danger"><i class="fa-solid fa-trash-can"></i> 删除</button>
+  </div>
+  </div>
+
+
 </aside>
 
 <!-- ═══ Main ═══ -->
 <div class="main">
 
-  <!-- Top Bar -->
+  <!-- Top Bar (融合) -->
   <header class="topbar">
     <div class="topbar-left">
-      <span class="topbar-title">Reasonix AI</span>
-      <span class="topbar-msg-count">24 条消息</span>
+      <span class="topbar-title">产品方案讨论</span>
+      <span class="topbar-msg-count">8 条消息</span>
     </div>
     <div class="topbar-right">
-      <button class="topbar-btn" title="搜索"><i class="fa-solid fa-search"></i></button>
-      <button class="topbar-btn" title="新建对话"><i class="fa-regular fa-plus"></i></button>
-      <button class="topbar-btn" title="设置"><i class="fa-regular fa-sun"></i></button>
+
+      <button class="topbar-btn" title="新建对话">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+      <button class="topbar-btn" title="删除">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+      <button class="topbar-btn" title="关闭">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
   </header>
 
-  <!-- Chat Container -->
+  <!-- Chat Area -->
   <div class="chat-container" id="chatContainer">
 
-    <!-- ── Conversation: 产品方案讨论 ── -->
     <div class="conversation-view" data-conversation="产品方案讨论">
-
-      <!-- AI Message -->
-      <div class="message">
-        <div class="message-content">
-          <div class="message-body">
-            <p>你好！我是 Reasonix AI 智能助手，有什么可以帮你的吗？</p>
-          </div>
-          <div class="message-actions">
-            <button class="message-action-btn"><i class="fa-regular fa-copy"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-thumbs-up"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-thumbs-down"></i></button>
-          </div>
+    <!-- ── AI Welcome Message ── -->
+    <div class="message">
+      <div class="message-content">
+        <div class="message-body">
+          <p>你好！我是 <strong>Reasonix Code</strong>，你的 AI 编程助手。我可以帮你：</p>
+          <p>• 阅读和理解代码库<br>
+          • 编写、重构和审查代码<br>
+          • 调试和性能优化<br>
+          • 项目架构设计</p>
+          <p>上下文：<strong>产品方案讨论</strong>。</p>
+        </div>
+        <div class="message-actions">
+          <button class="message-action-btn" title="复制">
+            <i class="fa-regular fa-copy"></i>
+          </button>
+          <button class="message-action-btn" title="编辑">
+            <i class="fa-regular fa-pen-to-square"></i>
+          </button>
+          <button class="message-action-btn" title="重新生成">
+            <i class="fa-solid fa-rotate"></i>
+          </button>
+          <button class="message-action-btn" title="有用">
+            <i class="fa-regular fa-thumbs-up"></i>
+          </button>
+          <button class="message-action-btn" title="点踩">
+            <i class="fa-regular fa-thumbs-down"></i>
+          </button>
         </div>
       </div>
-
-      <!-- User Bubble -->
-      <div class="message user-bubble">
-        <div class="message-content">
-          <div class="message-body">
-            <p>帮我设计一个产品需求文档模板</p>
-          </div>
-          <div class="message-actions">
-            <button class="message-action-btn"><i class="fa-regular fa-pen-to-square"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-copy"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-trash-can"></i></button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI with Reasoning -->
-      <div class="message">
-        <div class="message-content">
-          <details class="reasoning-block">
-            <summary class="reasoning-summary">
-              <i class="fa-regular fa-brain"></i> 深度思考
-              <span class="reasoning-arrow"><i class="fa-solid fa-chevron-down"></i></span>
-            </summary>
-            <div class="reasoning-body">
-              <p>用户需要一个 PRD 模板。需要覆盖：背景、目标、范围、功能需求、非功能需求、验收标准、排期。</p>
-              <p>考虑使用 Markdown 格式输出，包含表格和 checklist，方便直接复制使用。</p>
-            </div>
-          </details>
-          <div class="message-body">
-            <p>当然，这是一个标准的产品需求文档（PRD）模板，包含核心要素：</p>
-            <div class="code-block">
-              <div class="code-block-header">
-                <span class="code-block-filename">PRD-Template.md</span>
-                <div class="code-header-actions">
-                  <button class="code-header-btn"><i class="fa-regular fa-copy"></i></button>
-                  <button class="code-header-btn"><i class="fa-solid fa-expand"></i></button>
-                </div>
-              </div>
-              <pre><code># 产品需求文档
-
-## 1. 背景与目标
-- **背景**：
-- **目标**：
-- **成功指标**：
-
-## 2. 用户场景
-- **目标用户**：
-- **使用场景**：
-
-## 3. 功能需求
-- **功能列表**：
-  - [ ] 功能 A
-  - [ ] 功能 B
-
-## 4. 非功能需求
-- 性能：
-- 安全：
-- 兼容性：</code></pre>
-            </div>
-            <p>这个模板覆盖了 PRD 的核心模块。需要我针对某个具体场景展开吗？</p>
-          </div>
-          <div class="message-actions">
-            <button class="message-action-btn"><i class="fa-regular fa-copy"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-thumbs-up"></i></button>
-            <button class="message-action-btn"><i class="fa-regular fa-thumbs-down"></i></button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Suggestions -->
-      <div class="suggestions">
-        <span class="suggestion-chip">电商平台 PRD</span>
-        <span class="suggestion-chip">SaaS 后台</span>
-        <span class="suggestion-chip">移动端 App</span>
-      </div>
-
-      <div class="divider">
-        <span class="divider-line"></span>
-        <span class="divider-text">今天</span>
-        <span class="divider-line"></span>
-      </div>
-
-      <!-- Thinking -->
-      <div class="thinking-block">
-        <span>Reasonix AI 正在思考</span>
-        <div class="thinking-dots">
-          <span class="thinking-dot"></span>
-          <span class="thinking-dot"></span>
-          <span class="thinking-dot"></span>
-        </div>
-      </div>
-
     </div>
-    <!-- end conversation -->
 
-    <!-- ── Welcome Screen ── -->
-    <div class="conversation-view" data-conversation="__welcome__" style="display:none">
-      <!-- ... welcome content ... -->
+    <!-- ── Suggestion Chips (from ①) ── -->
+    <div class="suggestions">
+      <span class="suggestion-chip"><i class="fa-solid fa-shapes" style="margin-right:4px;color:var(--accent);"></i>Button 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-table" style="margin-right:4px;color:var(--accent);"></i>Table 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-window-maximize" style="margin-right:4px;color:var(--accent);"></i>Modal 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-chart-line" style="margin-right:4px;color:var(--accent);"></i>数据可视化</span>
     </div>
+
+    <!-- ── Divider (from ①) ── -->
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span class="divider-text">新的对话</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <!-- ── User Message (Bubble from ②) ── -->
+    <div class="message user-bubble">
+      <div class="message-content">
+        <div class="message-body">
+          <p>我需要一个数据表格组件，支持排序、筛选和分页，用 React + TypeScript</p>
+        </div>
+        <div class="user-actions">
+          <button class="code-action-btn" title="复制"><i class="fa-regular fa-copy"></i></button>
+          <button class="code-action-btn" title="编辑"><i class="fa-regular fa-pen-to-square"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── AI Response with Code Block (② style) ── -->
+    <div class="message">
+      <div class="message-content">
+        <!-- Reasoning Block (先推理) -->
+        <details class="reasoning-block">
+          <summary class="reasoning-summary">
+            <i class="fa-solid fa-brain" style="font-size:12px;color:var(--accent);"></i>
+            <span>已思考（2.3s）</span>
+            <i class="fa-solid fa-chevron-down reasoning-arrow"></i>
+          </summary>
+          <div class="reasoning-body">
+            <p>用户需要一个 DataTable 组件。让我设计一个完整的 React + TypeScript 实现，包含排序、筛选和分页功能。使用 useMemo 优化性能，支持泛型类型参数确保类型安全。</p>
+            <p>排序逻辑：点击表头切换升序/降序，支持多列排序。筛选：输入框实时过滤数据。分页：每页 10 条，显示页码导航。</p>
+          </div>
+        </details>
+
+        <div class="message-body">
+          <p>好的，这是一个带排序、筛选和分页功能的 <code>DataTable</code> 组件：</p>
+        </div>
+
+        <!-- Code Block macOS Style (from ②) -->
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-filename">DataTable.tsx</span>
+            <div class="code-header-actions">
+              <button class="code-header-btn" title="预览"><i class="fa-solid fa-eye"></i></button>
+              <button class="code-header-btn" title="复制"><i class="fa-regular fa-copy"></i></button>
+              <button class="code-header-btn" title="下载"><i class="fa-solid fa-download"></i></button>
+              <button class="code-header-btn" title="收起"><i class="fa-solid fa-chevron-up"></i></button>
+            </div>
+          </div>
+          <pre><code><span style="color:#818cf8;">import</span> { useState, useMemo } <span style="color:#818cf8;">from</span> <span style="color:#34d399;">'react'</span>;
+
+<span style="color:#818cf8;">interface</span> <span style="color:#60a5fa;">Column</span>&lt;T&gt; {
+  key: <span style="color:#34d399;">keyof</span> T;
+  label: <span style="color:#34d399;">string</span>;
+  sortable?: <span style="color:#34d399;">boolean</span>;
+}
+
+<span style="color:#818cf8;">export function</span> <span style="color:#fbbf24;">DataTable</span>&lt;T <span style="color:#818cf8;">extends</span> Record&lt;<span style="color:#34d399;">string</span>, <span style="color:#34d399;">any</span>&gt;&gt;({
+  data, columns, pageSize = <span style="color:#fb923c;">10</span>
+}: DataTableProps&lt;T&gt;) {
+  <span style="color:#818cf8;">const</span> [sort, setSort] = useState&lt;SortState&gt;({});
+  <span style="color:#818cf8;">const</span> [filter, setFilter] = useState(<span style="color:#34d399;">''</span>);
+  <span style="color:#818cf8;">const</span> [page, setPage] = useState(<span style="color:#fb923c;">1</span>);
+
+  <span style="color:#71717a;">// 排序 + 筛选 + 分页逻辑...</span>
+  <span style="color:#818cf8;">return</span> (
+    &lt;<span style="color:#60a5fa;">div</span>&gt;
+      &lt;<span style="color:#60a5fa;">input</span> placeholder=<span style="color:#34d399;">"搜索..."</span>
+        onChange={e =&gt; setFilter(e.target.value)} /&gt;
+      &lt;<span style="color:#60a5fa;">table</span>&gt;{<span style="color:#71717a;">/* ... */</span>}&lt;/<span style="color:#60a5fa;">table</span>&gt;
+      &lt;<span style="color:#60a5fa;">Pagination</span> page={page}
+        total={Math.ceil(data.length / pageSize)} /&gt;
+    &lt;/<span style="color:#60a5fa;">div</span>&gt;
+  );
+}</code></pre>
+        </div>
+
+        <!-- Code Actions: hover reveal -->
+        <div class="code-actions">
+          <button class="code-action-btn" title="复制"><i class="fa-regular fa-copy"></i></button>
+          <button class="code-action-btn" title="编辑"><i class="fa-regular fa-pen-to-square"></i></button>
+          <button class="code-action-btn" title="重新生成"><i class="fa-solid fa-rotate"></i></button>
+          <button class="code-action-btn" title="有用"><i class="fa-regular fa-thumbs-up"></i></button>
+          <button class="code-action-btn" title="点踩"><i class="fa-regular fa-thumbs-down"></i></button>
+        </div>
+
+
+      </div>
+    </div>
+
+    <!-- ── Thinking Indicator (from ①) ── -->
+    <div class="thinking-block" id="thinkingIndicator">
+      <span>Reasonix 正在思考</span>
+      <div class="thinking-dots">
+        <span class="thinking-dot"></span>
+        <span class="thinking-dot"></span>
+        <span class="thinking-dot"></span>
+      </div>
+    </div>
+    </div>
+
+    <!-- ── Welcome View (新对话) ── -->
+    <div class="conversation-view" data-conversation="__welcome__">
+    <div class="message">
+      <div class="message-content">
+        <div class="message-body">
+          <p>你好！我是 <strong>Reasonix Code</strong>，你的 AI 编程助手。我可以帮你：</p>
+          <p>• 阅读和理解代码库<br>
+          • 编写、重构和审查代码<br>
+          • 调试和性能优化<br>
+          • 项目架构设计</p>
+        </div>
+      </div>
+    </div>
+    <div class="suggestions">
+      <span class="suggestion-chip"><i class="fa-solid fa-shapes" style="margin-right:4px;color:var(--accent);"></i>Button 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-table" style="margin-right:4px;color:var(--accent);"></i>Table 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-window-maximize" style="margin-right:4px;color:var(--accent);"></i>Modal 组件</span>
+      <span class="suggestion-chip"><i class="fa-solid fa-chart-line" style="margin-right:4px;color:var(--accent);"></i>数据可视化</span>
+    </div>
+    </div>
+
   </div>
 
-  <!-- Input Area -->
+  <!-- ═══ Input Area (融合) ═══ -->
   <div class="input-area">
     <div class="input-wrapper">
       <div class="input-inner">
-        <button class="input-attach"><i class="fa-regular fa-paperclip"></i></button>
-        <textarea class="input-textarea" placeholder="发送消息…" rows="1"></textarea>
+        <button class="input-attach" title="附加文件">
+          <i class="fa-solid fa-paperclip"></i>
+        </button>
+        <textarea
+          class="input-textarea"
+          rows="1"
+          placeholder="输入消息... (Shift+Enter 换行，Enter 发送)"
+        ></textarea>
         <div class="input-right">
-          <button class="input-extra-btn"><i class="fa-regular fa-image"></i></button>
-          <button class="input-send"><i class="fa-regular fa-paper-plane-top"></i></button>
+          <button class="input-extra-btn" title="麦克风">
+            <i class="fa-solid fa-microphone"></i>
+          </button>
+          <button class="input-send" title="发送">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
         </div>
       </div>
+
     </div>
   </div>
 
 </div>
 
 <script>
-  // ── Simple Conversation Switcher ──
-  function switchConversation(name) {
-    document.querySelectorAll('.conversation-view').forEach(v => {
-      v.style.display = v.dataset.conversation === name ? '' : 'none';
-    });
-  }
-
-  document.querySelectorAll('.sidebar-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-      // don't intercept clicks on the more button
-      if (e.target.closest('.sidebar-more-btn')) return;
-      e.preventDefault();
-      // toggle active
-      document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-      this.classList.add('active');
-      // visibility
-      document.querySelectorAll('.sidebar-item .dot').forEach(d => {
-        d.style.visibility = this.contains(d) ? '' : 'hidden';
-      });
-      document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
-      switchConversation(this.dataset.conversation);
-    });
+  // Auto-resize textarea
+  document.querySelector('.input-textarea')?.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 200) + 'px';
   });
 
+  // Hide thinking indicator after a timeout (demo)
+  setTimeout(() => {
+    const el = document.getElementById('thinkingIndicator');
+    if (el) el.style.display = 'none';
+  }, 3000);
+
+  // ── Sidebar dropdown toggle ──
   document.querySelectorAll('.sidebar-more-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
-      const dropdown = this.closest('.sidebar-item-wrap').querySelector('.sidebar-dropdown');
-      if (!dropdown) return;
+      const wrap = this.closest('.sidebar-item-wrap');
+      const dropdown = wrap.querySelector('.sidebar-dropdown');
+      // Close other dropdowns
       document.querySelectorAll('.sidebar-dropdown.open').forEach(d => {
         if (d !== dropdown) d.classList.remove('open');
       });
       dropdown.classList.toggle('open');
     });
   });
-
+  // Close dropdown on outside click
   document.addEventListener('click', function(e) {
     if (!e.target.closest('.sidebar-item-wrap')) {
       document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
     }
   });
 
+  // ── Demo: 切换会话 ──
+  const container = document.getElementById('chatContainer');
+  const topbarTitle = document.querySelector('.topbar-title');
+  const topbarMsgCount = document.querySelector('.topbar-msg-count');
+
+  function switchConversation(name) {
+    // 切换 conversation-view 显示
+    container.querySelectorAll('.conversation-view').forEach(v => {
+      v.style.display = v.dataset.conversation === name ? '' : 'none';
+    });
+    // 更新顶栏
+    if (name === '__welcome__') {
+      topbarTitle.textContent = '新对话';
+      topbarMsgCount.textContent = '0 条消息';
+    } else {
+      topbarTitle.textContent = name;
+      topbarMsgCount.textContent = name === '产品方案讨论' ? '8 条消息' : '0 条消息';
+    }
+  }
+
+  // 点击侧栏会话
+  document.querySelectorAll('.sidebar-item[data-conversation]').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      // 切换 active 状态
+      document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+      // 同步绿色圆点：active 项显示，其余隐藏
+      document.querySelectorAll('.sidebar-item .dot').forEach(d => {
+        d.style.visibility = this.contains(d) ? '' : 'hidden';
+      });
+      // 关闭下拉菜单
+      document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
+      // 切换会话
+      switchConversation(this.dataset.conversation);
+    });
+  });
+
+  // 点击 "+" 新建对话
   document.querySelector('.topbar-btn[title="新建对话"]')?.addEventListener('click', function() {
+    // 取消侧栏 active
     document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    // 关闭下拉
     document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
+    // 所有圆点隐藏
     document.querySelectorAll('.sidebar-item .dot').forEach(d => d.style.visibility = 'hidden');
+    // 显示欢迎界面
     switchConversation('__welcome__');
   });
 
+  // 初始化：显示当前会话
   switchConversation('产品方案讨论');
 </script>
 </body>
