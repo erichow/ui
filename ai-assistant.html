@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reasonix AI · 智能助手</title>
+  <title>Better-Design AI · 智能助手</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <!-- All 3 theme fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@450;500&display=swap" rel="stylesheet">
@@ -1023,7 +1023,7 @@
 <aside class="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">R</div>
-    <span class="sidebar-title">Reasonix</span>
+    <span class="sidebar-title">Better-Design</span>
     <span class="sidebar-badge">Pro</span>
   </div>
 
@@ -1147,7 +1147,7 @@
     <div class="conversation-view" id="welcomeView">
       <div style="flex:1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 400px;">
         <div style="width:72px; height:72px; border-radius:var(--radius-lg); background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:20px; color:white; font-family:var(--font-display); font-weight:700;">R</div>
-        <h2 style="font-size:22px; font-weight:600; color:var(--text-primary); margin-bottom:8px; font-family:var(--font-display); letter-spacing:-0.02em;">你好，我是 Reasonix</h2>
+        <h2 style="font-size:22px; font-weight:600; color:var(--text-primary); margin-bottom:8px; font-family:var(--font-display); letter-spacing:-0.02em;">你好，我是 Better-Design</h2>
         <p style="color:var(--text-secondary); font-size:14px; max-width:380px; line-height:1.6; margin-bottom:24px;">你的智能编程助手，随时准备帮助你解决问题。</p>
         <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; max-width:420px;">
           <div class="suggestion-chip" style="padding:8px 18px; font-size:13px;">📖 解释这段代码</div>
@@ -1247,7 +1247,7 @@
     document.getElementById('themeDropdown').classList.remove('open');
 
     // Save preference
-    try { localStorage.setItem('reasonix-theme', theme); } catch(e) {}
+    try { localStorage.setItem('better-design-theme', theme); } catch(e) {}
   }
 
   // Theme switcher toggle
@@ -1471,7 +1471,7 @@
   // ═══════════════════════════════════════════════════════
   // Restore saved theme
   try {
-    const saved = localStorage.getItem('reasonix-theme');
+    const saved = localStorage.getItem('better-design-theme');
     if (saved && themeNames[saved]) {
       switchTheme(saved);
     } else {
