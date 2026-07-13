@@ -1,0 +1,1428 @@
+<!doctype html>
+<html lang="zh-CN" class="theme-cornflower">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reasonix AI · 智能助手</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <!-- All 3 theme fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@450;500&display=swap" rel="stylesheet">
+  <style>
+    /* ══════ Inline SVG Icons (replaces Font Awesome) ══════ */
+    .icon { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; flex-shrink: 0; color: currentColor; vertical-align: middle; }
+
+    /* ══════ Theme: Cornflower (light blue-grey) ══════ */
+    .theme-cornflower {
+      --bg-primary: #f4f6f9;
+      --bg-secondary: #eef0f5;
+      --bg-tertiary: #e6e9f0;
+      --bg-hover: #dce0e8;
+      --bg-elevated: #ffffff;
+      --bg-user-msg: #e8edf8;
+      --border-subtle: rgba(0, 0, 0, 0.06);
+      --border-default: rgba(0, 0, 0, 0.09);
+      --border-hover: rgba(0, 0, 0, 0.14);
+      --text-primary: #1e2028;
+      --text-secondary: #5a5e6b;
+      --text-tertiary: #9499a8;
+      --text-inverse: #ffffff;
+      --accent: #5383e8;
+      --accent-hover: #4169c9;
+      --accent-muted: rgba(83, 131, 232, 0.12);
+      --accent-subtle: rgba(83, 131, 232, 0.06);
+      --accent-gradient: linear-gradient(135deg, #5383e8, #7499f0);
+      --user-gradient: linear-gradient(135deg, #5a5e6b, #3f4350);
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 18px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.05);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,0.06);
+      --shadow-xl: 0 16px 48px rgba(0,0,0,0.08);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Plus Jakarta Sans', var(--font-sans);
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* ══════ Theme: Editorial Warm (warm cream / serif) ══════ */
+    .theme-editorial {
+      --bg-primary: #f8f4ed;
+      --bg-secondary: #fefcf7;
+      --bg-tertiary: #ede8de;
+      --bg-hover: rgba(139, 58, 58, 0.08);
+      --bg-elevated: #fefcf7;
+      --bg-user-msg: #ebe6db;
+      --border-subtle: #ede8de;
+      --border-default: #e3ddd2;
+      --border-hover: rgba(26, 23, 20, 0.14);
+      --text-primary: #1a1714;
+      --text-secondary: #7a7066;
+      --text-tertiary: #a99e92;
+      --text-inverse: #fefcf7;
+      --accent: #8b3a3a;
+      --accent-hover: #ab5a5a;
+      --accent-muted: rgba(139, 58, 58, 0.08);
+      --accent-subtle: rgba(139, 58, 58, 0.04);
+      --accent-gradient: linear-gradient(135deg, #8b3a3a, #ab5a5a);
+      --user-gradient: linear-gradient(135deg, #7a7066, #5a5e6b);
+      --success: #22c55e;
+      --warning: #eab308;
+      --error: #ef4444;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --radius-xl: 26px;
+      --shadow-sm: 0 1px 3px rgba(26, 23, 20, 0.04), 0 1px 2px rgba(26, 23, 20, 0.02);
+      --shadow-md: 0 4px 16px rgba(26, 23, 20, 0.06), 0 2px 6px rgba(26, 23, 20, 0.03);
+      --shadow-lg: 0 12px 40px rgba(26, 23, 20, 0.08), 0 4px 12px rgba(26, 23, 20, 0.04);
+      --shadow-xl: 0 16px 48px rgba(26, 23, 20, 0.10), 0 6px 16px rgba(26, 23, 20, 0.05);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+    }
+
+    /* Smooth transition when switching themes */
+    html,
+    html *,
+    html *::before,
+    html *::after {
+      transition: background-color 0.35s ease,
+                  color 0.35s ease,
+                  border-color 0.35s ease,
+                  box-shadow 0.35s ease;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.28); }
+
+    /* ══════ Sidebar ══════ */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 260px;
+      height: 100vh;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border-default);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+    }
+    .sidebar-header {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-default);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sidebar-logo {
+      width: 28px;
+      height: 28px;
+      background: var(--accent-gradient);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+    }
+    .sidebar-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      letter-spacing: -0.01em;
+    }
+    .sidebar-badge {
+      font-size: 10px;
+      font-weight: 500;
+      background: var(--accent-muted);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 1px 8px;
+      border-radius: 10px;
+      margin-left: auto;
+      opacity: 0.7;
+    }
+
+    /* ── New Chat Button ── */
+    .new-chat-btn {
+      margin: 12px 12px 8px;
+      padding: 9px 0;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .new-chat-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(79, 143, 247, 0.3);
+    }
+
+    /* ── Conversation List ── */
+    .sidebar-section {
+      padding: 8px 16px 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      margin: 1px 8px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.12s;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-item:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    .sidebar-item.active {
+      background: var(--accent-muted);
+      color: var(--accent);
+      border-left-color: var(--accent);
+    }
+
+    .sidebar-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      flex-shrink: 0;
+    }
+    .sidebar-item .sidebar-text {
+      flex: 1;
+      text-align: left;
+      min-width: 0;
+    }
+    .sidebar-item .time {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .sidebar-item-wrap {
+      position: relative;
+    }
+    /* ── Sidebar Dropdown ── */
+    .sidebar-dropdown {
+      display: none;
+      position: absolute;
+      right: 8px;
+      top: 100%;
+      z-index: 20;
+      min-width: 140px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      box-shadow: var(--shadow-lg);
+    }
+    .sidebar-dropdown.open {
+      display: block;
+    }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 7px 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      transition: all 0.1s;
+    }
+    .dropdown-item:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    .dropdown-item.danger:hover {
+      color: var(--error);
+      background: rgba(239, 68, 68, 0.1);
+    }
+    .dropdown-item i, .dropdown-item .icon {
+      width: 14px;
+      font-size: 12px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .sidebar-more-btn {
+      width: 22px;
+      height: 22px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .sidebar-more-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+
+    /* ══════ Main Layout ══════ */
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* ── Top Bar (with theme switcher) ── */
+    .topbar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid var(--border-default);
+      background: var(--bg-primary);
+      flex-shrink: 0;
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      letter-spacing: -0.01em;
+    }
+    .topbar-msg-count {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      background: var(--bg-tertiary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-default);
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .topbar-btn {
+      width: 30px;
+      height: 30px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+    .topbar-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .topbar-btn i { font-size: 14px; }
+    .topbar-btn .icon { width: 14px; height: 14px; }
+
+    /* ── Theme Switcher Dropdown ── */
+    .theme-switcher-wrap {
+      position: relative;
+    }
+    .theme-switcher-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px 4px 8px;
+      height: 28px;
+      border: 1px solid var(--border-default);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      transition: all 0.12s;
+    }
+    .theme-switcher-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text-primary);
+      background: var(--bg-hover);
+    }
+    .theme-switcher-btn .theme-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .theme-switcher-btn .theme-dot.cornflower { background: #5383e8; }
+    .theme-switcher-btn .theme-dot.editorial { background: #8b3a3a; }
+
+    .theme-switcher-btn i { font-size: 10px; margin-left: 2px; }
+    .theme-switcher-btn .icon { width: 10px; height: 10px; margin-left: 2px; }
+
+    .theme-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: calc(100% + 4px);
+      z-index: 30;
+      min-width: 170px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      box-shadow: var(--shadow-lg);
+    }
+    .theme-dropdown.open { display: block; }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 8px 10px;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      cursor: pointer;
+      border-radius: var(--radius-sm);
+      text-align: left;
+      transition: all 0.1s;
+    }
+    .theme-option:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    .theme-option.active {
+      color: var(--accent);
+      background: var(--accent-subtle);
+    }
+
+    .theme-option .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border-default);
+    }
+
+    .theme-option .swatch.cornflower { background: linear-gradient(135deg, #f4f6f9, #5383e8); }
+    .theme-option .swatch.editorial { background: linear-gradient(135deg, #f8f4ed, #8b3a3a); }
+
+    .theme-option .theme-label {
+      flex: 1;
+    }
+    .theme-option .theme-check {
+      font-size: 11px;
+      color: var(--accent);
+      opacity: 0;
+    }
+    .theme-option.active .theme-check { opacity: 1; }
+
+    /* ── Chat Area ── */
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    /* ── Message ── */
+    .message {
+      display: flex;
+      gap: 12px;
+      padding: 10px 16px;
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+      border-radius: var(--radius-md);
+      transition: background 0.12s;
+    }
+    .message:hover {
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .theme-cornflower .message:hover {
+      background: rgba(0, 0, 0, 0.015);
+    }
+    .message-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .message-body {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-primary);
+    }
+    .message-body p { margin-bottom: 8px; }
+    .message-body p:last-child { margin-bottom: 0; }
+    .message-body code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      background: var(--bg-tertiary);
+      padding: 1px 5px;
+      border-radius: 4px;
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+    }
+    .message-body pre {
+      margin: 10px 0;
+      padding: 14px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .message-body pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+    }
+
+    /* ── User Message Bubble ── */
+    .message.user-bubble {
+      justify-content: flex-end;
+    }
+    .message.user-bubble .message-content {
+      order: 0;
+    }
+    .message.user-bubble .message-body {
+      background: var(--bg-user-msg);
+      border: 1px solid var(--accent-muted);
+      border-radius: var(--radius-lg);
+      padding: 10px 14px;
+      max-width: 70%;
+      margin-left: auto;
+    }
+    .message.user-bubble .message-body p { margin: 0; }
+    .message.user-bubble .message-actions {
+      justify-content: flex-end;
+    }
+
+    /* ── Message Hover Actions ── */
+    .message-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.12s;
+    }
+    .message:hover .message-actions { opacity: 1; }
+    .message-action-btn {
+      width: 26px;
+      height: 26px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: all 0.12s;
+    }
+    .message-action-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .message-action-btn i { font-size: 12px; }
+    .message-action-btn .icon { width: 12px; height: 12px; }
+
+    /* ── Code Block ── */
+    .code-block {
+      margin: 10px 0;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-default);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg-tertiary);
+      border-bottom: 1px solid var(--border-default);
+    }
+    .code-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .code-header-btn {
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+    .code-header-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .code-header-btn i { font-size: 12px; }
+    .code-header-btn .icon { width: 12px; height: 12px; }
+    .code-block-filename {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-family: var(--font-mono);
+    }
+    .code-block pre {
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .code-block pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      font-family: var(--font-mono);
+    }
+
+    /* ── Code Actions: hover reveal ── */
+    .code-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 0 0 0 4px;
+      opacity: 0;
+      transition: opacity 0.12s;
+    }
+    .message:hover .code-actions { opacity: 1; }
+    .code-action-btn {
+      width: 26px;
+      height: 26px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+    .code-action-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .code-action-btn i { font-size: 12px; }
+    .code-action-btn .icon { width: 12px; height: 12px; }
+
+    /* ── User Message Hover Actions ── */
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px 0 0 4px;
+      opacity: 0;
+      transition: opacity 0.12s;
+      justify-content: flex-end;
+    }
+    .message.user-bubble:hover .user-actions { opacity: 1; }
+
+    /* ── Streaming Cursor ── */
+    .streaming-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 15px;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: blink 0.8s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ── Conversation View ── */
+    .conversation-view {
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Thinking Block ── */
+    .thinking-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px 8px 56px;
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+      color: var(--text-tertiary);
+      font-size: 13px;
+    }
+    .thinking-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .thinking-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--text-tertiary);
+      animation: thinking-bounce 1.4s ease-in-out infinite;
+    }
+    .thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+    .thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes thinking-bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* ── Suggestion Chips ── */
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 16px 8px 56px;
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .suggestion-chip {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .suggestion-chip:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-default);
+      color: var(--text-primary);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 820px;
+      margin: 16px auto;
+      width: 100%;
+      padding: 0 16px;
+    }
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-subtle);
+    }
+    .divider-text {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    /* ── Reasoning Block ── */
+    .reasoning-block {
+      margin: 6px 0 8px;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      background: var(--bg-tertiary);
+      overflow: hidden;
+    }
+    .reasoning-summary {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      list-style: none;
+      user-select: none;
+      transition: background 0.12s;
+    }
+    .reasoning-summary:hover {
+      background: var(--bg-hover);
+    }
+    .reasoning-summary::-webkit-details-marker { display: none; }
+    .reasoning-arrow {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      margin-left: auto;
+      transition: transform 0.2s;
+    }
+    .reasoning-block[open] .reasoning-arrow {
+      transform: rotate(180deg);
+    }
+    .reasoning-body {
+      padding: 4px 12px 10px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-default);
+    }
+    .reasoning-body p { margin-bottom: 6px; }
+    .reasoning-body p:last-child { margin-bottom: 0; }
+
+    /* ══════ Input Area ══════ */
+    .input-area {
+      flex-shrink: 0;
+      padding: 12px 20px 16px;
+      border-top: 1px solid var(--border-default);
+      background: var(--bg-primary);
+    }
+    .input-wrapper {
+      max-width: 820px;
+      margin: 0 auto;
+      position: relative;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .input-wrapper:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-muted);
+    }
+    .input-inner {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      padding: 8px 6px 8px 4px;
+    }
+    .input-attach {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.12s;
+    }
+    .input-attach:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .input-attach i { font-size: 16px; }
+    .input-attach .icon { width: 16px; height: 16px; }
+    .input-textarea {
+      flex: 1;
+      resize: none;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      padding: 4px 6px;
+      min-height: 24px;
+      max-height: 200px;
+    }
+    .input-textarea::placeholder { color: var(--text-tertiary); }
+    .input-right {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .input-extra-btn {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      color: var(--text-tertiary);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.12s;
+    }
+    .input-extra-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-secondary);
+    }
+    .input-extra-btn i { font-size: 16px; }
+    .input-extra-btn .icon { width: 16px; height: 16px; }
+    .input-send {
+      width: 34px;
+      height: 34px;
+      border: none;
+      background: var(--accent-gradient);
+      color: white;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .input-send:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(79, 143, 247, 0.3);
+    }
+    .input-send:disabled {
+      background: var(--bg-tertiary);
+      color: var(--text-tertiary);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+    .input-send i { font-size: 14px; }
+    .input-send .icon { width: 14px; height: 14px; }
+
+
+    /* ══════ Responsive ══════ */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .message { padding: 10px 12px; }
+      .input-area { padding: 8px 12px 12px; }
+      .topbar { padding: 0 12px; }
+      .message.user-bubble .message-body { max-width: 85%; }
+    }
+  </style>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+</head>
+<body>
+
+
+<!-- ═══ Sidebar ═══ -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">R</div>
+    <span class="sidebar-title">Reasonix</span>
+    <span class="sidebar-badge">Pro</span>
+  </div>
+
+  <!-- Conversations -->
+  <div class="sidebar-section">历史对话</div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item active" href="#" data-conversation="产品方案讨论">
+    <span class="dot"></span>
+    <span class="sidebar-text">产品方案讨论</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="代码审查">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">代码审查</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="架构设计">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">架构设计</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="API 集成方案">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">API 集成方案</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="数据看板重构">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">数据看板重构</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+  <div class="sidebar-item-wrap">
+  <a class="sidebar-item" href="#" data-conversation="Python 数据分析">
+    <span class="dot" style="visibility:hidden"></span>
+    <span class="sidebar-text">Python 数据分析</span>
+    <button class="sidebar-more-btn"><iconify-icon class="icon" icon="solar:menu-dots-linear"></iconify-icon></button>
+  </a>
+  <div class="sidebar-dropdown">
+    <button class="dropdown-item"><iconify-icon class="icon" icon="solar:pen-new-square-linear"></iconify-icon> 重命名</button>
+    <button class="dropdown-item danger"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon> 删除</button>
+  </div>
+  </div>
+</aside>
+
+<!-- ═══ Main ═══ -->
+<div class="main">
+
+  <!-- ═══ Top Bar (with theme switcher) ═══ -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-title">产品方案讨论</span>
+      <span class="topbar-msg-count">5 条消息</span>
+    </div>
+    <div class="topbar-right">
+      <!-- Theme Switcher Dropdown -->
+      <div class="theme-switcher-wrap">
+        <button class="theme-switcher-btn" id="themeSwitcherBtn">
+          <span class="theme-dot cornflower"></span>
+          <span id="themeSwitcherLabel">Cornflower</span>
+          <iconify-icon class="icon" icon="solar:alt-arrow-down-linear"></iconify-icon>
+        </button>
+        <div class="theme-dropdown" id="themeDropdown">
+          <button class="theme-option active" data-theme="cornflower">
+            <span class="swatch cornflower"></span>
+            <span class="theme-label">Cornflower</span>
+            <span class="theme-check"><iconify-icon class="icon" icon="solar:check-circle-linear"></iconify-icon></span>
+          </button>
+          <button class="theme-option" data-theme="editorial">
+            <span class="swatch editorial"></span>
+            <span class="theme-label">Editorial</span>
+            <span class="theme-check"><iconify-icon class="icon" icon="solar:check-circle-linear"></iconify-icon></span>
+          </button>
+        </div>
+      </div>
+
+      <button class="topbar-btn" title="新建对话"><iconify-icon class="icon" icon="solar:add-circle-linear"></iconify-icon></button>
+      <button class="topbar-btn" title="删除"><iconify-icon class="icon" icon="solar:trash-bin-minimalistic-linear"></iconify-icon></button>
+      <button class="topbar-btn" title="关闭"><iconify-icon class="icon" icon="solar:close-circle-linear"></iconify-icon></button>
+    </div>
+  </header>
+
+  <!-- ═══ Chat Area ═══ -->
+  <div class="chat-container" id="chatContainer">
+
+    <!-- Welcome / Empty State -->
+    <div class="conversation-view" id="welcomeView">
+      <div style="flex:1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 400px;">
+        <div style="width:72px; height:72px; border-radius:var(--radius-lg); background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:20px; color:white; font-family:var(--font-display); font-weight:700;">R</div>
+        <h2 style="font-size:22px; font-weight:600; color:var(--text-primary); margin-bottom:8px; font-family:var(--font-display); letter-spacing:-0.02em;">你好，我是 Reasonix</h2>
+        <p style="color:var(--text-secondary); font-size:14px; max-width:380px; line-height:1.6; margin-bottom:24px;">你的智能编程助手，随时准备帮助你解决问题。</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center; max-width:420px;">
+          <div class="suggestion-chip" style="padding:8px 18px; font-size:13px;">📖 解释这段代码</div>
+          <div class="suggestion-chip" style="padding:8px 18px; font-size:13px;">🔧 帮我调试</div>
+          <div class="suggestion-chip" style="padding:8px 18px; font-size:13px;">🧹 代码优化建议</div>
+          <div class="suggestion-chip" style="padding:8px 18px; font-size:13px;">📝 写单元测试</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conversation View -->
+    <div class="conversation-view" id="conversationView" style="display:none;">
+      <!-- Messages get injected here by JS -->
+      <div id="messagesContainer"></div>
+    </div>
+  </div>
+
+  <!-- ═══ Input Area ═══ -->
+  <div class="input-area">
+    <div class="input-wrapper">
+      <div class="input-inner">
+        <button class="input-attach"><iconify-icon class="icon" icon="solar:paperclip-linear"></iconify-icon></button>
+        <textarea class="input-textarea" id="inputField" rows="1" placeholder="输入你的问题… (Enter 发送，Shift+Enter 换行)"></textarea>
+        <div class="input-right">
+          <button class="input-extra-btn"><iconify-icon class="icon" icon="solar:smile-circle-linear"></iconify-icon></button>
+          <button class="input-extra-btn"><iconify-icon class="icon" icon="solar:microphone-linear"></iconify-icon></button>
+          <button class="input-send" id="sendBtn">
+            <iconify-icon class="icon" icon="solar:plain-linear"></iconify-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ═══════════════════════════════════════════════════════
+  // Data
+  // ═══════════════════════════════════════════════════════
+  const conversations = {
+    '产品方案讨论': {
+      messages: [
+        { role: 'user', content: '我们正在设计一个新的 SaaS 产品，目标用户是中小企业的技术团队，想讨论一下产品定位和核心功能。' },
+        { role: 'assistant', content: '好的，我来帮你梳理一下。对于面向中小企业技术团队的 SaaS 产品，我认为有几个关键的切入点需要先确定：\n\n**1. 产品定位**\n要回答"为什么是你的产品"而不是竞品。常见定位方式有：\n- 极致易用（No-code / Low-code）\n- 深度专业（某垂直领域的专家系统）\n- 价格优势（免费增值模式）\n\n**2. 核心功能建议**\n从团队协作角度来看，以下几个方向比较热门：\n\n```\n功能矩阵建议：\n├── 项目管理 ✅ 必备\n├── 代码协作 🔥 高优先级\n├── CI/CD 集成 ⭐ 差异化\n└── 数据分析 📊 增值模块\n```\n\n**3. 技术选型考量**\n- 前端：React / Vue 生态\n- 后端：Node.js / Go 微服务\n- 数据库：PostgreSQL + Redis\n\n你们目前对哪个方向比较有感觉？我们可以深入讨论。' },
+      ]
+    },
+    '代码审查': {
+      messages: [
+        { role: 'user', content: '帮我审查一下这段代码有没有什么问题？' },
+        { role: 'assistant', content: '请把代码贴出来，我来帮你审查。可以从以下几个方面检查：\n\n- 正确性：逻辑是否有缺陷\n- 性能：是否有不必要的计算\n- 安全性：是否存在注入风险\n- 可维护性：命名、结构是否清晰' },
+      ]
+    },
+    '架构设计': {
+      messages: [
+        { role: 'user', content: '我们准备重构现有的单体应用为微服务架构，你有什么建议？' },
+        { role: 'assistant', content: '单体转微服务是一个系统工程，建议分步进行：\n\n### 第一步：服务拆分\n按业务边界（Bounded Context）拆分，而不是按技术层拆分。\n\n### 第二步：基础设施\n- API Gateway\n- 服务发现\n- 分布式 tracing\n- 消息队列\n\n### 第三步：数据策略\n每个服务拥有独立的数据库，通过 API 或事件进行数据交换。' },
+      ]
+    },
+  };
+
+  let currentTheme = 'cornflower';
+  let currentConversation = '产品方案讨论';
+
+  // ═══════════════════════════════════════════════════════
+  // Theme Switching
+  // ═══════════════════════════════════════════════════════
+  const themeNames = {
+    cornflower: 'Cornflower · 淡蓝轻风',
+    editorial: 'Editorial · 暖意纸纹',
+  };
+  const themeDots = {
+    cornflower: 'cornflower',
+    editorial: 'editorial',
+  };
+
+  function switchTheme(theme) {
+    // Update <html> class
+    document.documentElement.className = 'theme-' + theme;
+    currentTheme = theme;
+
+    // Update switcher button visuals
+    const btn = document.getElementById('themeSwitcherBtn');
+    const dot = btn.querySelector('.theme-dot');
+    const label = document.getElementById('themeSwitcherLabel');
+    dot.className = 'theme-dot ' + theme;
+    label.textContent = themeNames[theme];
+
+    // Update dropdown active state
+    document.querySelectorAll('.theme-option').forEach(opt => {
+      const isActive = opt.dataset.theme === theme;
+      opt.classList.toggle('active', isActive);
+    });
+
+    // Close dropdown
+    document.getElementById('themeDropdown').classList.remove('open');
+
+    // Save preference
+    try { localStorage.setItem('reasonix-theme', theme); } catch(e) {}
+  }
+
+  // Theme switcher toggle
+  document.getElementById('themeSwitcherBtn').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('themeDropdown').classList.toggle('open');
+  });
+
+  // Theme option click
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      switchTheme(this.dataset.theme);
+    });
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener('click', function() {
+    document.getElementById('themeDropdown').classList.remove('open');
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // Message Rendering
+  // ═══════════════════════════════════════════════════════
+  function renderMessages() {
+    const container = document.getElementById('messagesContainer');
+    const conv = conversations[currentConversation];
+    if (!conv) return;
+
+    container.innerHTML = '';
+    conv.messages.forEach(msg => {
+      const div = document.createElement('div');
+      div.className = 'message' + (msg.role === 'user' ? ' user-bubble' : '');
+
+      if (msg.role === 'assistant') {
+        // Render with markdown-like formatting
+        div.innerHTML = `
+          <div class="message-content">
+            <div class="message-body">${renderContent(msg.content)}</div>
+            <div class="message-actions">
+              <button class="message-action-btn" title="复制"><iconify-icon class="icon" icon="solar:clipboard-linear"></iconify-icon></button>
+              <button class="message-action-btn" title="重新生成"><iconify-icon class="icon" icon="solar:refresh-linear"></iconify-icon></button>
+              <button class="message-action-btn" title="赞"><iconify-icon class="icon" icon="solar:like-linear"></iconify-icon></button>
+              <button class="message-action-btn" title="踩"><iconify-icon class="icon" icon="solar:dislike-linear"></iconify-icon></button>
+            </div>
+          </div>`;
+      } else {
+        div.innerHTML = `
+          <div class="message-content">
+            <div class="message-body">${escapeHtml(msg.content)}</div>
+            <div class="message-actions">
+              <button class="message-action-btn" title="编辑"><iconify-icon class="icon" icon="solar:pen-linear"></iconify-icon></button>
+              <button class="message-action-btn" title="复制"><iconify-icon class="icon" icon="solar:clipboard-linear"></iconify-icon></button>
+            </div>
+          </div>`;
+      }
+      container.appendChild(div);
+    });
+  }
+
+  function renderContent(text) {
+    // Simple markdown renderer
+    let html = escapeHtml(text);
+
+    // Bold
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+    // Code blocks (```...```)
+    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, function(match, lang, code) {
+      return '<div class="code-block">' +
+        '<div class="code-block-header">' +
+        '<span class="code-block-filename">' + (lang || 'code') + '</span>' +
+        '<div class="code-header-actions">' +
+        '<button class="code-header-btn" title="复制"><iconify-icon class="icon" icon="solar:clipboard-linear"></iconify-icon></button>' +
+        '</div></div>' +
+        '<pre><code>' + escapeHtml(code.trim()) + '</code></pre></div>';
+    });
+
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Line breaks
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = html.replace(/\n/g, '<br>');
+
+    return '<p>' + html + '</p>';
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // Conversation Switching
+  // ═══════════════════════════════════════════════════════
+  function switchConversation(name) {
+    currentConversation = name;
+
+    // Update sidebar
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.conversation === name);
+    });
+
+    // Update title
+    document.querySelector('.topbar-title').textContent = name;
+
+    // Toggle views
+    if (name === '__welcome__') {
+      document.getElementById('welcomeView').style.display = '';
+      document.getElementById('conversationView').style.display = 'none';
+      document.querySelector('.topbar-msg-count').textContent = '0 条消息';
+    } else {
+      document.getElementById('welcomeView').style.display = 'none';
+      document.getElementById('conversationView').style.display = '';
+      const conv = conversations[name];
+      if (conv) {
+        document.querySelector('.topbar-msg-count').textContent = conv.messages.length + ' 条消息';
+      }
+      renderMessages();
+    }
+
+    // Close all dropdowns
+    document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+
+  // Sidebar item clicks
+  document.querySelectorAll('.sidebar-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      if (e.target.closest('.sidebar-more-btn')) return;
+      // Update dot visibility
+      document.querySelectorAll('.sidebar-item .dot').forEach(d => {
+        d.style.visibility = this.contains(d) ? '' : 'hidden';
+      });
+      document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
+      switchConversation(this.dataset.conversation);
+    });
+  });
+
+  // Sidebar more buttons
+  document.querySelectorAll('.sidebar-more-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const wrap = this.closest('.sidebar-item-wrap');
+      const dropdown = wrap.querySelector('.sidebar-dropdown');
+      // Close others
+      document.querySelectorAll('.sidebar-dropdown.open').forEach(d => {
+        if (d !== dropdown) d.classList.remove('open');
+      });
+      dropdown.classList.toggle('open');
+    });
+  });
+
+  // New chat button
+  document.querySelector('.topbar-btn[title="新建对话"]')?.addEventListener('click', function() {
+    document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.sidebar-dropdown.open').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.sidebar-item .dot').forEach(d => d.style.visibility = 'hidden');
+    switchConversation('__welcome__');
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // Send / Input
+  // ═══════════════════════════════════════════════════════
+  const inputField = document.getElementById('inputField');
+  const sendBtn = document.getElementById('sendBtn');
+
+  function sendMessage() {
+    const text = inputField.value.trim();
+    if (!text) return;
+
+    // If on welcome, switch to conversation
+    if (document.getElementById('welcomeView').style.display !== 'none') {
+      document.getElementById('welcomeView').style.display = 'none';
+      document.getElementById('conversationView').style.display = '';
+    }
+
+    // Create a temporary conversation if needed
+    if (!conversations[currentConversation] || currentConversation === '__welcome__') {
+      const name = '新对话';
+      currentConversation = name;
+      conversations[name] = { messages: [] };
+      document.querySelector('.topbar-title').textContent = name;
+    }
+
+    // Add user message
+    conversations[currentConversation].messages.push({ role: 'user', content: text });
+    renderMessages();
+    inputField.value = '';
+    inputField.style.height = 'auto';
+
+    // Scroll to bottom
+    const chatContainer = document.getElementById('chatContainer');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    // Simulate AI response
+    setTimeout(() => {
+      const reply = '好的，这是一个很好的问题。让我来为你详细解答。\n\n首先，我们需要理解这个问题背后的核心需求。根据你的描述，我建议从以下几个方面来考虑：\n\n**1. 明确目标**\n- 定义清楚你想要达成的具体目标\n- 分清主次优先级\n\n**2. 技术方案**\n```\n推荐技术栈：\n├── TypeScript（类型安全）\n├── React（前端框架）\n├── Node.js（后端运行时）\n└── PostgreSQL（数据存储）\n```\n\n**3. 实施路径**\n建议采用渐进式的方式，先搭建核心功能 MVP，然后根据反馈迭代优化。\n\n如果还有其他细节需要讨论，随时告诉我！';
+      conversations[currentConversation].messages.push({ role: 'assistant', content: reply });
+      renderMessages();
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 800);
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  inputField.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // Auto-resize textarea
+  inputField.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 200) + 'px';
+  });
+
+  // ═══════════════════════════════════════════════════════
+  // Init
+  // ═══════════════════════════════════════════════════════
+  // Restore saved theme
+  try {
+    const saved = localStorage.getItem('reasonix-theme');
+    if (saved && themeNames[saved]) {
+      switchTheme(saved);
+    } else {
+      switchTheme('cornflower');
+    }
+  } catch(e) {}
+
+  switchConversation('产品方案讨论');
+</script>
+</body>
+</html>
